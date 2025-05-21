@@ -1,0 +1,54 @@
+/* pdf-server/public/styles.css */
+
+@font-face {
+  font-family: "Expo Arabic Light";
+  src: url("/fonts/ExpoArabic-Light.woff2") format("woff2"),
+    url("/fonts/ExpoArabic-Light.woff") format("woff"),
+    url("/fonts/ExpoArabic-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Expo Arabic Bold";
+  src: url("/fonts/ExpoArabic-Bold.woff2") format("woff2"),
+    url("/fonts/ExpoArabic-Bold.woff") format("woff"),
+    url("/fonts/ExpoArabic-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 89mm;
+  height: 89mm;
+  font-family: "Expo Arabic Light", serif !important;
+  font-weight: normal;
+  font-size: 16pt;
+  direction: rtl;
+  text-align: center;
+  color: black;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.content {
+  padding: 10mm;
+  line-height: 1.5;
+  word-spacing: 2px;
+  letter-spacing: 0.5px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

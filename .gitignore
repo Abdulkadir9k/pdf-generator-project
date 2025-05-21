@@ -1,0 +1,20 @@
+# Git ignore file for Node.js projects
+
+# Node.js
+node_modules/
+.env
+.DS_Store # macOS specific
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tgz
+.vscode/
+
+# Vercel specific (if you had any Vercel build output at root)
+.vercel/
+
+# Render specific (if Render created any local files, less common)
+.render/
+
+# Puppeteer Cache (important to ignore large cache files)
+.cache/puppeteer

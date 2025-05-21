@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>اكتب اهدائك | مؤسسة الشارقة للتمكين الاجتماعي</title>
+
+    <style>
+      /* Keep @font-face here so the textarea content looks correct */
+      @font-face {
+        font-family: "Expo Arabic Light";
+        src: url("fonts/ExpoArabic-Light.woff2") format("woff2"),
+          url("fonts/ExpoArabic-Light.woff") format("woff"),
+          url("fonts/ExpoArabic-Light.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Expo Arabic Bold";
+        src: url("fonts/ExpoArabic-Bold.woff2") format("woff2"),
+          url("fonts/ExpoArabic-Bold.woff") format("woff"),
+          url("fonts/ExpoArabic-Bold.ttf") format("truetype");
+        font-weight: bold;
+        font-style: normal;
+      }
+    </style>
+
+    <style>
+      /* CSS Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Variables */
+      :root {
+        --bg: #e8dfd5;
+        --accent: #7eb594;
+        --text: #000;
+        --w: 800px;
+      }
+
+      body {
+        direction: rtl;
+        font-family: "Expo Arabic Light", "Segoe UI", Tahoma, Verdana,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: var(--w);
+        padding: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .logo {
+        max-width: 535px;
+        height: auto;
+        margin-bottom: 15px;
+      }
+
+      header div.flex.justify-center img.h-auto {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      h1 {
+        font-family: "Expo Arabic Bold", "Segoe UI", Tahoma, Verdana, sans-serif;
+        font-size: 24px;
+        color: #a0522d;
+        margin-bottom: 10px;
+      }
+
+      .input-container {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 150px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        font-family: "Expo Arabic Bold", "Segoe UI", Tahoma, Verdana, sans-serif;
+        resize: vertical;
+        direction: rtl;
+        text-align: right;
+        margin-bottom: 15px;
+      }
+
+      button {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 12px 25px;
+        font-size: 16px;
+        font-family: "Expo Arabic Bold", "Segoe UI", Tahoma, Verdana, sans-serif;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: #6a9a7e;
+      }
+
+      /* #print-area is no longer used for dynamic PDF generation on frontend */
+      #print-area {
+        display: none;
+      }
+
+      footer {
+        margin-top: auto;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 14px;
+        color: #666;
+      }
+
+      /* Responsive */
+      @media (max-width: 480px) {
+        .container {
+          padding: 10px;
+        }
+        h1 {
+          font-size: 20px;
+        }
+        .logo {
+          max-width: 200px;
+          height: auto;
+        }
+        textarea {
+          min-height: 120px;
+          padding: 10px;
+          font-size: 14px;
+        }
+        button {
+          padding: 10px 20px;
+          font-size: 14px;
+          width: 100%;
+        }
+      }
+      @media (min-width: 481px) and (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+        h1 {
+          font-size: 22px;
+        }
+        textarea {
+          min-height: 130px;
+          font-size: 15px;
+        }
+      }
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .container {
+          max-width: 700px;
+        }
+      }
+      /* Remove @media print section if you don't need direct browser printing */
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="w-full max-w-4xl py-6 px-4">
+        <div class="flex justify-center logo-container">
+          <img
+            src="/logo.png"
+            alt="Prophet's Neighbours Endowment Logo"
+            class="logo"
+          />
+          <h1>امنح أهلك وأحبائك صكا وقفيا, واجعل أثرها باقٍ لهم</h1>
+        </div>
+      </header>
+
+      <div class="input-container">
+        <textarea id="text-input" placeholder=" اكتب نص الاهداء...."></textarea>
+        <button id="print-button">اطبع الاهداء</button>
+      </div>
+
+      <div id="print-area" style="display: none;"></div>
+
+      <footer>© 2025 مؤسسة الشارقة للتمكين الاجتماعي</footer>
+    </div>
+
+    <script>
+      const textInput = document.getElementById("text-input");
+      const printButton = document.getElementById("print-button");
+
+      printButton.addEventListener("click", async () => {
+        const txt = textInput.value.trim();
+        if (!txt) {
+          alert("الرجاء إدخال نص قبل الطباعة.");
+          return;
+        }
+
+        // Disable button to prevent multiple clicks
+        printButton.disabled = true;
+        printButton.textContent = 'جاري التحضير للطباعة...';
+
+        try {
+            // Adjust the URL if your server is hosted elsewhere
+            const response = await fetch('http://localhost:3000/generate-pdf', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: txt })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to generate PDF on server.');
+            }
+
+            // Receive PDF as a Blob
+            const pdfBlob = await response.blob();
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+
+            // Open the PDF in a new window/tab
+            const printWindow = window.open(pdfUrl, '_blank');
+            if (!printWindow) {
+                alert("يرجى السماح بالنوافذ المنبثقة لمتابعة الطباعة.");
+                // Provide a download link if pop-up is blocked
+                const downloadLink = document.createElement('a');
+                downloadLink.href = pdfUrl;
+                downloadLink.download = 'dedication.pdf';
+                downloadLink.textContent = 'انقر هنا لتحميل الإهداء يدوياً';
+                document.body.appendChild(downloadLink);
+                setTimeout(() => downloadLink.remove(), 10000);
+            } else {
+                // Attempt to trigger print automatically after window loads
+                printWindow.onload = function () {
+                    setTimeout(() => {
+                        printWindow.focus();
+                        printWindow.print();
+                    }, 100);
+                };
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('حدث خطأ أثناء طباعة الإهداء: ' + error.message);
+        } finally {
+            // Re-enable button
+            printButton.disabled = false;
+            printButton.textContent = 'اطبع الاهداء';
+        }
+      });
+
+      // Optional: Save textarea content to local storage
+      document.addEventListener("DOMContentLoaded", () => {
+        const saved = localStorage.getItem("printText");
+        if (saved) textInput.value = saved;
+      });
+      textInput.addEventListener("input", () => {
+        localStorage.setItem("printText", textInput.value);
+      });
+    </script>
+  </body>
+</html>
