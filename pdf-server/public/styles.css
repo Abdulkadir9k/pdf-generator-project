@@ -2,18 +2,14 @@
 
 @font-face {
   font-family: "Expo Arabic Light";
-  src: url("/fonts/ExpoArabic-Light.woff2") format("woff2"),
-    url("/fonts/ExpoArabic-Light.woff") format("woff"),
-    url("/fonts/ExpoArabic-Light.ttf") format("truetype");
+  src: url("/fonts/ExpoArabic-Light.ttf") format("truetype"); /* ONLY include the TTF path if you only have TTF files */
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Expo Arabic Bold";
-  src: url("/fonts/ExpoArabic-Bold.woff2") format("woff2"),
-    url("/fonts/ExpoArabic-Bold.woff") format("woff"),
-    url("/fonts/ExpoArabic-Bold.ttf") format("truetype");
+  src: url("/fonts/ExpoArabic-Bold.ttf") format("truetype"); /* ONLY include the TTF path if you only have TTF files */
   font-weight: bold;
   font-style: normal;
 }
