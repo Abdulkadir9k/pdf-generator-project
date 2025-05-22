@@ -43,12 +43,23 @@ app.post("/generate-pdf", async (req, res) => {
     const stylesPath = path.join(__dirname, "public", "styles.css"); // Path to your styles.css
     const cssContent = await fs.readFile(stylesPath, 'utf8'); // Read styles.css content
 
+    // --- ADD THIS DEBUGGING LOG ---
+    console.log('--- styles.css content loaded ---');
+    console.log(cssContent.substring(0, 500) + '...'); // Log first 500 chars to save space
+    console.log('---------------------------------');
+
     // Replace the <link> tag with a <style> block containing the actual CSS content
     htmlContent = htmlContent.replace(
         '<link rel="stylesheet" href="/styles.css" />', // <--- ADD THE SPACE AND THE SLASH HERE
         `<style>${cssContent}</style>`
     );
     // --- END NEW / MODIFIED SECTION ---
+
+    // --- ADD THIS DEBUGGING LOG ---
+    console.log('--- HTML content *after* CSS injection (first 500 chars) ---');
+    console.log(htmlContent.substring(0, 500) + '...'); // Log first 500 chars to save space
+    console.log('------------------------------------------------------------');
+    // --- END DEBUGGING LOG ---
 
     // Inject the text into the content div
     htmlContent = htmlContent.replace(
