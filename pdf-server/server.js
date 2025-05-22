@@ -45,7 +45,7 @@ app.post("/generate-pdf", async (req, res) => {
 
     // Replace the <link> tag with a <style> block containing the actual CSS content
     htmlContent = htmlContent.replace(
-        '<link rel="stylesheet" href="/styles.css">', // This is the line in print-template.html
+        '<link rel="stylesheet" href="/styles.css" />', // <--- ADD THE SPACE AND THE SLASH HERE
         `<style>${cssContent}</style>`
     );
     // --- END NEW / MODIFIED SECTION ---
