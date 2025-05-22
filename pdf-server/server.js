@@ -39,6 +39,17 @@ app.post("/generate-pdf", async (req, res) => {
     const templatePath = path.join(__dirname, "public", "print-template.html");
     let htmlContent = await fs.readFile(templatePath, "utf8");
 
+    // --- NEW / MODIFIED SECTION FOR CSS INJECTION ---
+    const stylesPath = path.join(__dirname, "public", "styles.css"); // Path to your styles.css
+    const cssContent = await fs.readFile(stylesPath, 'utf8'); // Read styles.css content
+
+    // Replace the <link> tag with a <style> block containing the actual CSS content
+    htmlContent = htmlContent.replace(
+        '<link rel="stylesheet" href="/styles.css">', // This is the line in print-template.html
+        `<style>${cssContent}</style>`
+    );
+    // --- END NEW / MODIFIED SECTION ---
+
     // Inject the text into the content div
     htmlContent = htmlContent.replace(
       '<div class="content"></div>',
